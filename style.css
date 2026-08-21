@@ -1,0 +1,634 @@
+/* =========================================================
+   بازی گنج دانش - Stylesheet
+   فونت فقط Vazirmatn محلی - بدون هیچ CDN یا فونت آنلاین
+   ========================================================= */
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("fonts/Vazirmatn[wght].woff2") format("woff2-variations"),
+       url("fonts/Vazirmatn-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("fonts/Vazirmatn-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("fonts/Vazirmatn-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("fonts/Vazirmatn-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --gold: #e0a63c;
+  --gold-light: #f6cd6b;
+  --teal-dark: #0f3d3e;
+  --teal: #14595a;
+  --teal-light: #1c8385;
+  --purple: #7b4fb0;
+  --pink: #e0578f;
+  --green: #3ea66b;
+  --red: #d9534f;
+  --cream: #fff6e5;
+  --paper: #f4e4c1;
+  --text-dark: #2c1a0e;
+  --radius-lg: 26px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 10px 30px rgba(15, 61, 62, 0.25);
+  --shadow-pop: 0 6px 0 rgba(0,0,0,0.18);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Vazirmatn", "Tahoma", sans-serif;
+  direction: rtl;
+  text-align: right;
+  background: linear-gradient(160deg, #0f3d3e 0%, #14595a 45%, #1c8385 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+a.skip-link {
+  position: absolute;
+  right: -999px;
+  top: 0;
+  background: var(--gold);
+  color: #222;
+  padding: 10px 18px;
+  border-radius: 0 0 10px 10px;
+  z-index: 999;
+  font-weight: 700;
+}
+a.skip-link:focus {
+  right: 10px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ============== لایه‌های صفحه ============== */
+.screen {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  animation: fadeIn 0.4s ease;
+}
+.screen.active { display: flex; flex-direction: column; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============== هدر مشترک ============== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 6px;
+  color: #fff;
+}
+.app-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+.app-header .brand img {
+  width: 40px; height: 40px;
+  object-fit: contain;
+}
+.score-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.score-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  backdrop-filter: blur(4px);
+}
+.score-badge img, .score-badge .emoji-fallback {
+  width: 22px; height: 22px;
+  object-fit: contain;
+}
+.reset-btn {
+  background: rgba(217,83,79,0.85);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ============== کارت‌ها و باکس‌های عمومی ============== */
+.card-box {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 28px;
+}
+
+/* ============== صفحه شروع ============== */
+#screen-start .app-container {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.start-panel {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-soft);
+  border: 4px solid var(--gold);
+}
+.start-panel .title-emoji {
+  font-size: 3.4rem;
+  margin-bottom: 6px;
+}
+.start-panel h1 {
+  color: var(--teal-dark);
+  font-size: 1.8rem;
+  margin: 6px 0 2px;
+}
+.start-panel p.subtitle {
+  color: var(--teal);
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+.name-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--gold);
+  font-size: 1.1rem;
+  font-family: inherit;
+  text-align: center;
+  margin-bottom: 16px;
+  background: #fff;
+}
+.name-input:focus { border-color: var(--teal); }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  color: #3a2200;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0 5px 0 #a8721f;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #a8721f;
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--teal-dark);
+  border: 2px solid var(--teal-light);
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.form-error {
+  color: var(--red);
+  font-weight: 700;
+  min-height: 22px;
+  margin-bottom: 10px;
+}
+
+/* ============== نقشه گنج / هاب ============== */
+.hub-title {
+  color: #fff;
+  text-align: center;
+  margin: 6px 0 20px;
+}
+.hub-title h2 { font-size: 1.6rem; margin: 0; }
+.hub-title p { margin: 6px 0 0; opacity: 0.9; }
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+@media (max-width: 560px) {
+  .hub-grid { grid-template-columns: 1fr; }
+}
+
+.hub-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+  text-align: center;
+  border: none;
+  padding: 0;
+  box-shadow: var(--shadow-soft);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.18s ease;
+}
+.hub-card:hover:not(:disabled) { transform: translateY(-4px) scale(1.01); }
+.hub-card:disabled { filter: grayscale(0.7) brightness(0.6); cursor: not-allowed; }
+
+.hub-card .overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.05));
+  padding: 16px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hub-card .overlay .icon-emoji { font-size: 1.6rem; }
+.hub-card .overlay h3 { margin: 0; font-size: 1.15rem; }
+.hub-card .overlay small { opacity: 0.9; }
+.hub-card .lock-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+.hub-card .done-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--green);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.hub-bg-farsi { background-color: #4a2f1c; background-image: linear-gradient(rgba(74,47,28,0.3), rgba(0,0,0,0.5)), url("images/hafez.png"); }
+.hub-bg-math { background-color: #142a5e; background-image: linear-gradient(rgba(20,42,94,0.3), rgba(0,0,0,0.5)), url("images/safineh.png"); }
+.hub-bg-science { background-color: #0c3b3b; background-image: linear-gradient(rgba(12,59,59,0.3), rgba(0,0,0,0.5)), url("images/oloom.png"); }
+.hub-bg-treasure { background-color: #5b3a12; background-image: linear-gradient(rgba(91,58,18,0.3), rgba(0,0,0,0.5)), url("images/ganjedanesh.png"); }
+
+/* ============== صفحه آزمون ============== */
+.quiz-header {
+  background: rgba(0,0,0,0.35);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.progress-track {
+  flex: 1;
+  min-width: 140px;
+  height: 12px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.quiz-bg {
+  border-radius: var(--radius-lg);
+  background-size: cover;
+  background-position: center;
+  padding: 4px;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+.quiz-bg.bg-farsi { background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.55)), url("images/hafez.png"); }
+.quiz-bg.bg-math { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.55)), url("images/safineh.png"); }
+.quiz-bg.bg-science { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.55)), url("images/oloom.png"); }
+
+.question-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  width: 100%;
+  box-shadow: var(--shadow-soft);
+  border: 4px solid var(--gold);
+}
+.question-card h3 {
+  color: var(--teal-dark);
+  font-size: 1.15rem;
+  line-height: 1.9;
+  margin: 0 0 18px;
+}
+.options-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.option-btn {
+  background: #fff;
+  border: 2px solid #d9c79a;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s ease;
+}
+.option-btn .opt-letter {
+  background: var(--teal-light);
+  color: #fff;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--teal); background: #fffdf6; }
+.option-btn:disabled { cursor: default; }
+.option-btn.correct {
+  background: #e5f7ea; border-color: var(--green); color: #1d5c36;
+}
+.option-btn.correct .opt-letter { background: var(--green); }
+.option-btn.wrong {
+  background: #fdecec; border-color: var(--red); color: #7c2523;
+}
+.option-btn.wrong .opt-letter { background: var(--red); }
+
+/* ============== پنل بازخورد (توضیح) ============== */
+.feedback-panel {
+  margin-top: 18px;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  animation: popIn 0.25s ease;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.feedback-panel.correct { background: #e5f7ea; border: 2px solid var(--green); }
+.feedback-panel.wrong { background: #fdecec; border: 2px solid var(--red); }
+.feedback-panel h4 { margin: 0 0 8px; font-size: 1.05rem; }
+.feedback-panel p { margin: 0 0 14px; line-height: 1.8; }
+.feedback-panel.correct h4 { color: #1d5c36; }
+.feedback-panel.wrong h4 { color: #7c2523; }
+
+.reward-pop {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+.reward-pop img, .reward-pop .emoji-fallback { width: 90px; height: 90px; object-fit: contain; }
+.reward-pop.show {
+  animation: rewardPop 1s ease forwards;
+}
+@keyframes rewardPop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(-8deg); }
+  25% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) rotate(4deg); }
+  45% { transform: translate(-50%, -50%) scale(1) rotate(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -60%) scale(0.9); }
+}
+
+/* ============== صفحه اتمام بخش ============== */
+.section-complete {
+  text-align: center;
+  color: #fff;
+}
+.section-complete .big-emoji { font-size: 4rem; }
+
+/* ============== صفحه صندوقچه گنج ============== */
+.treasure-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+.chest-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.chest-btn img, .chest-btn .emoji-fallback {
+  width: 220px;
+  max-width: 60vw;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.45));
+  transition: transform 0.2s ease;
+}
+.chest-btn:hover img { transform: scale(1.04) rotate(-1deg); }
+.chest-btn.opened img { animation: chestOpen 0.6s ease forwards; }
+@keyframes chestOpen {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15) rotate(-4deg); }
+  60% { transform: scale(0.95) rotate(3deg); }
+  100% { transform: scale(1.05) rotate(0); }
+}
+
+.scroll-wrap {
+  display: none;
+  position: relative;
+  width: min(92vw, 480px);
+}
+.scroll-wrap.show { display: block; animation: unroll 0.7s ease; }
+@keyframes unroll {
+  from { transform: scaleY(0.15); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+.scroll-bg {
+  width: 100%;
+  display: block;
+}
+.scroll-content {
+  position: absolute;
+  top: 18%;
+  left: 12%;
+  right: 12%;
+  bottom: 18%;
+  overflow-y: auto;
+  color: #3a2200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 6px;
+}
+.scroll-content h3 { margin: 0 0 6px; font-size: 1.2rem; }
+.scroll-content .stat-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.scroll-content .stat-line img, .scroll-content .stat-line .emoji-fallback {
+  width: 24px; height: 24px; object-fit: contain;
+}
+.scroll-content .total-line {
+  margin-top: 6px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #7a4a08;
+}
+.scroll-content .congrats-msg {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* بدون صندوقچه واقعی: پس‌زمینه جایگزین */
+.treasure-bg-wrap {
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url("images/ganjedanesh.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ============== مودال خطا ============== */
+.error-box {
+  background: var(--cream);
+  border: 3px solid var(--red);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  max-width: 420px;
+  margin: auto;
+}
+.error-box .err-emoji { font-size: 2.5rem; }
+.error-box h3 { color: var(--red); margin: 8px 0; }
+
+/* ============== fallback هنگام نبود تصویر ============== */
+.emoji-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+}
+img.img-fallback-hidden { display: none; }
+
+footer.app-footer {
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.8rem;
+  padding: 14px;
+}
+
+/* ============== واکنش‌گرایی ============== */
+@media (max-width: 480px) {
+  .start-panel { padding: 26px 18px; }
+  .question-card h3 { font-size: 1.05rem; }
+  .app-header .brand { font-size: 1.05rem; }
+}

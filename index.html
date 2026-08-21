@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>بازی گنج دانش | آزمون پایه ششم</title>
+<meta name="description" content="بازی گنج دانش؛ آزمون آموزشی و بازی‌محور پایه ششم شامل حافظیه، سفینه ریاضی و آزمایشگاه علوم." />
+<meta name="theme-color" content="#0f3d3e" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" href="icons/192.png" />
+<link rel="apple-touch-icon" href="icons/192.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<a href="#main-content" class="skip-link">رفتن به محتوای اصلی</a>
+
+<!-- ===================== صفحه شروع ===================== -->
+<section id="screen-start" class="screen active" tabindex="-1" aria-label="صفحه شروع بازی">
+  <div class="app-container" id="main-content">
+    <div class="start-panel">
+      <div class="title-emoji" aria-hidden="true">🏆📜</div>
+      <h1>بازی گنج دانش</h1>
+      <p class="subtitle">ای قهرمان آینده‌ی سرزمین پارس، برای آغاز سفر دانش نام خود را بنویس.</p>
+      <form id="start-form" novalidate>
+        <label for="player-name-input" class="visually-hidden">نام قهرمان</label>
+        <input
+          type="text"
+          id="player-name-input"
+          class="name-input"
+          placeholder="نام خود را بنویس..."
+          maxlength="24"
+          autocomplete="off"
+          required
+        />
+        <div id="start-error" class="form-error" role="alert" aria-live="assertive"></div>
+        <button type="submit" class="btn-primary">🚪 ورود به سرزمین پارس</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== نقشه گنج (هاب) ===================== -->
+<section id="screen-hub" class="screen" tabindex="-1" aria-label="نقشه گنج">
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <img src="images/ganjedanesh.png" alt="" data-emoji-fallback="🏆" />
+        <span>گنج دانش</span>
+      </div>
+      <div class="score-badges" aria-label="امتیازهای من">
+        <span class="score-badge">
+          <img src="images/emtiaz.png" alt="امتیاز" data-emoji-fallback="⭐" />
+          <span class="js-star-count">0</span>
+        </span>
+        <span class="score-badge">
+          <img src="images/medal.png" alt="مدال" data-emoji-fallback="🏅" />
+          <span class="js-medal-count">0</span>
+        </span>
+        <span class="score-badge">
+          <img src="images/coin.png" alt="سکه" data-emoji-fallback="🪙" />
+          <span class="js-coin-count">0</span>
+        </span>
+        <button type="button" class="reset-btn">🔄 بازی جدید</button>
+      </div>
+    </header>
+
+    <div class="hub-title">
+      <h2 id="hub-greeting">درود بر تو، قهرمان سرزمین پارس!</h2>
+      <p>برای رسیدن به صندوقچه گنج دانش، سه مرحله را یکی‌یکی طی کن.</p>
+    </div>
+
+    <div class="hub-grid">
+      <button type="button" id="card-farsi" class="hub-card hub-bg-farsi" aria-label="ورود به حافظیه">
+        <span class="lock-badge">🔒 قفل نیست</span>
+        <span class="done-badge" style="display:none;">✅ کامل شد</span>
+        <span class="overlay">
+          <span class="icon-emoji" aria-hidden="true">📖</span>
+          <h3>حافظیه</h3>
+          <small>۴۰ سؤال فارسی</small>
+        </span>
+      </button>
+
+      <button type="button" id="card-math" class="hub-card hub-bg-math" aria-label="ورود به سفینه ریاضی">
+        <span class="lock-badge">🔒 قفل</span>
+        <span class="done-badge" style="display:none;">✅ کامل شد</span>
+        <span class="overlay">
+          <span class="icon-emoji" aria-hidden="true">🚀</span>
+          <h3>سفینه ریاضی</h3>
+          <small>۴۰ سؤال ریاضی</small>
+        </span>
+      </button>
+
+      <button type="button" id="card-science" class="hub-card hub-bg-science" aria-label="ورود به آزمایشگاه علوم">
+        <span class="lock-badge">🔒 قفل</span>
+        <span class="done-badge" style="display:none;">✅ کامل شد</span>
+        <span class="overlay">
+          <span class="icon-emoji" aria-hidden="true">🧪</span>
+          <h3>آزمایشگاه علوم</h3>
+          <small>۴۰ سؤال علوم</small>
+        </span>
+      </button>
+
+      <button type="button" id="card-treasure" class="hub-card hub-bg-treasure" aria-label="ورود به صندوقچه گنج">
+        <span class="lock-badge">🔒 قفل</span>
+        <span class="done-badge" style="display:none;">✅ باز شد</span>
+        <span class="overlay">
+          <span class="icon-emoji" aria-hidden="true">🏆</span>
+          <h3>صندوقچه گنج</h3>
+          <small>جایزه پایانی</small>
+        </span>
+      </button>
+    </div>
+  </div>
+  <footer class="app-footer">بازی گنج دانش • کاملاً آفلاین • ساخته‌شده برای دانش‌آموزان پایه ششم</footer>
+</section>
+
+<!-- ===================== صفحه آزمون ===================== -->
+<section id="screen-quiz" class="screen" tabindex="-1" aria-label="صفحه سؤال">
+  <div class="app-container">
+    <div class="quiz-header">
+      <button type="button" id="quiz-back-btn" class="btn-secondary" aria-label="بازگشت به نقشه گنج">↩ بازگشت</button>
+      <strong id="quiz-section-title">حافظیه</strong>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="پیشرفت سؤال‌ها">
+        <div id="quiz-progress-fill" class="progress-fill" style="width:0%;"></div>
+      </div>
+      <span id="quiz-progress-text">سؤال ۱ از ۴۰</span>
+    </div>
+
+    <div id="quiz-bg" class="quiz-bg bg-farsi">
+      <div class="question-card" aria-live="polite">
+        <h3 id="question-text">در حال بارگذاری سؤال...</h3>
+        <div id="options-list" class="options-list" role="group" aria-label="گزینه‌های پاسخ"></div>
+
+        <div id="feedback-panel" class="feedback-panel" hidden>
+          <h4 id="feedback-title"></h4>
+          <div id="feedback-explanation"></div>
+          <button type="button" id="ack-btn" class="btn-primary">متوجه شدم ✅</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== انیمیشن جایزه ===================== -->
+<div id="reward-pop" class="reward-pop" aria-hidden="true">
+  <img id="reward-pop-img" src="images/emtiaz.png" alt="" />
+  <span id="reward-pop-text">⭐ +۱ امتیاز</span>
+</div>
+
+<!-- ===================== صفحه پایان بخش ===================== -->
+<section id="screen-complete" class="screen" tabindex="-1" aria-label="پایان بخش">
+  <div class="app-container">
+    <div class="section-complete card-box" style="background: rgba(255,255,255,0.08); color:#fff; margin:auto;">
+      <div id="complete-emoji" class="big-emoji" aria-hidden="true">🎉</div>
+      <h2 id="complete-title">آفرین!</h2>
+      <p id="complete-text"></p>
+      <button type="button" id="complete-next-btn" class="btn-primary">ادامه</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== صفحه صندوقچه گنج ===================== -->
+<section id="screen-treasure" class="screen" tabindex="-1" aria-label="صندوقچه گنج">
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <img src="images/ganjedanesh.png" alt="" data-emoji-fallback="🏆" />
+        <span>صندوقچه گنج دانش</span>
+      </div>
+      <button type="button" class="reset-btn">🔄 بازی جدید</button>
+    </header>
+
+    <div class="treasure-bg-wrap">
+      <div class="treasure-stage">
+        <p>روی صندوقچه بزن تا تومار گنج دانش باز شود!</p>
+        <button type="button" id="chest-btn" class="chest-btn" aria-expanded="false" aria-label="باز کردن صندوقچه گنج">
+          <img id="chest-img" src="images/ganjedanesh.png" alt="صندوقچه گنج" data-emoji-fallback="🎁" data-fallback-size="6rem" />
+        </button>
+
+        <div id="scroll-wrap" class="scroll-wrap">
+          <img class="scroll-bg" src="images/tumar.png" alt="" data-emoji-fallback="📜" />
+          <div class="scroll-content">
+            <h3>نام قهرمان سرزمین پارس: <span id="scroll-hero-name"></span></h3>
+            <div class="stat-line">
+              <img src="images/emtiaz.png" alt="امتیاز" data-emoji-fallback="⭐" />
+              <span>امتیاز فارسی: <strong id="scroll-farsi">0</strong></span>
+            </div>
+            <div class="stat-line">
+              <img src="images/medal.png" alt="مدال" data-emoji-fallback="🏅" />
+              <span>مدال‌های ریاضی: <strong id="scroll-math">0</strong></span>
+            </div>
+            <div class="stat-line">
+              <img src="images/coin.png" alt="سکه" data-emoji-fallback="🪙" />
+              <span>سکه‌های علوم: <strong id="scroll-science">0</strong></span>
+            </div>
+            <div class="total-line">🏆 جمع کل: <span id="scroll-total">0</span></div>
+            <p class="congrats-msg">تبریک! قهرمان پارسی عزیز، تو به گنج دانش دست پیدا کردی. 🎊</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== صفحه خطا ===================== -->
+<section id="screen-error" class="screen" tabindex="-1" aria-label="خطا">
+  <div class="app-container">
+    <div class="error-box" role="alert">
+      <div class="err-emoji" aria-hidden="true">⚠️</div>
+      <h3>مشکلی پیش آمد!</h3>
+      <p id="error-message">در بارگذاری اطلاعات خطایی رخ داد.</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px;">
+        <button type="button" id="error-retry-btn" class="btn-primary">تلاش دوباره 🔁</button>
+        <button type="button" id="error-home-btn" class="btn-secondary">بازگشت به نقشه گنج 🗺️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
